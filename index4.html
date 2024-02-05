@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <style>
+    body {
+        body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.game-container {
+    text-align: center;
+}
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 0;
+    transition: background-color 0.3s ease;
+}
+
+header {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+}
+
+nav {
+    background-color: #555;
+    color: #fff;
+    padding: 0.5em;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    display: inline;
+    margin-right: 10px;
+}
+
+nav a {
+    text-decoration: none;
+    color: #fff;
+}
+
+main {
+    padding: 20px;
+}
+
+section {
+    margin-bottom: 20px;
+}
+
+footer {
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    padding: 1em;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+body{
+          margin: 10px;
+        padding:20px ;
+    background: linear-gradient(45deg, #2c2929,#666c75 );  
+    }
+    .hoome{
+        text-align: center;
+        display: block;
+    }
+    img{
+        width: 250px;
+        height:250px ;
+        margin:20px ;
+        padding: 30px;
+    }
+    .homt,.llll{
+        margin: 50px;
+        padding: 60px;
+        width: 40px;
+        height: 40px;
+    }
+/* Additional styling for dark mode */
+.dark-mode {
+    background-color: #222;
+    color: #fff;
+}
+
+.container {
+        text-align: center;
+    }
+    
+    #game-container {
+        display: flex;
+        justify-content: space-around;
+        margin-top: 20px;
+    }
+    
+    .choice {
+        font-size: 16px;
+        padding: 10px 20px;
+        cursor: pointer;
+    }
+   </style>
+    <title>Responsive Website with JS</title>
+</head>
+<body>
+    <header>
+        <h1>My Responsive Website</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section id="home">
+            <h2>Welcome to Our Website!</h2>
+            <p>This is a simple example of a responsive webpage with JavaScript.</p>
+        </section>
+
+        <section id="about">
+            <h2>About Us</h2>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed ac felis quam.</p>
+        </section>
+
+        <section id="services">
+            <h2>Our Services</h2>
+            <p>We offer a variety of services to meet your needs.</p>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Us</h2>
+            <p>Feel free to reach out to us for any inquiries or questions.</p>
+        </section>
+    </main>
+    <div class="container">
+        <h1>Rock Paper Scissors Game</h1>
+        <div id="game-container">
+            <button class="choice" onclick="playGame('rock')">Rock</button>
+            <button class="choice" onclick="playGame('paper')">Paper</button>
+            <button class="choice" onclick="playGame('scissors')">Scissors</button>
+        </div>
+        <p id="result"></p>
+    </div>
+  
+    
+        
+    
+    <div class="game-container">
+        <h1>Guess the Number</h1>
+        <p>Guess a number between 1 and 10:</p>
+        <input type="number" id="guessInput">
+        <button onclick="checkGuess()">Submit Guess</button>
+        <p id="message"></p>
+    </div>
+    <script>
+    function playGame(userChoice) {
+        const choices = ['rock', 'paper', 'scissors'];
+        const computerChoice = choices[Math.floor(Math.random() * choices.length)];
+    
+        const resultMessage = document.getElementById('result');
+    
+        if (userChoice === computerChoice) {
+            resultMessage.textContent = `It's a tie! You both chose ${userChoice}.`;
+        } else if (
+            (userChoice === 'rock' && computerChoice === 'scissors') ||
+            (userChoice === 'paper' && computerChoice === 'rock') ||
+            (userChoice === 'scissors' && computerChoice === 'paper')
+        ) {
+            resultMessage.textContent = `You win! ${userChoice} beats ${computerChoice}.`;
+            resultMessage.style.color = 'green';
+        } else {
+            resultMessage.textContent = `You lose! ${computerChoice} beats ${userChoice}.`;
+            resultMessage.style.color = 'red';
+        }
+    }
+
+    const secretNumber = Math.floor(Math.random() * 10) + 1;
+let attempts = 3;
+
+function checkGuess() {
+    const guessInput = document.getElementById('guessInput');
+    const message = document.getElementById('message');
+
+    const userGuess = parseInt(guessInput.value);
+
+    if (isNaN(userGuess) || userGuess < 1 || userGuess > 10) {
+        message.textContent = 'Please enter a valid number between 1 and 10.';
+    } else {
+        attempts--;
+
+        if (userGuess === secretNumber) {
+            message.textContent = 'Congratulations! You guessed the correct number!';
+            message.style.color = 'green';
+        } else if (attempts === 0) {
+            message.textContent = `Sorry, you're out of attempts. The correct number was ${secretNumber}.`;
+            message.style.color = 'red';
+        } else {
+            message.textContent = `Wrong guess. You have ${attempts} attempt(s) left.`;
+            message.style.color = 'orange';
+        }
+    }
+
+    guessInput.value = '';
+}
+
+    </script>
+    <footer>
+        <p>&copy; 2024 My Responsive Website</p>
+        <button id="darkModeToggle">Toggle Dark Mode</button>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+  
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+  
+    const darkModeToggle = document.getElementById('darkModeToggle');
+    darkModeToggle.addEventListener('click', function () {
+        document.body.classList.toggle('dark-mode');
+    });
+});
+
+    </script>
+    
+</body>
+</html>
